@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, FlatList, StyleSheet } from "react-native";
 
 import ListItem from "../components/ListItem";
 import ListItemSeparator from "../components/ListItemSeparator";
+import ListItemDeleteAction from "../components/ListItemDeleteAction";
 import Screen from "../components/Screen";
 
-const messages = [
+const initialMessages = [
   {
     id: 1,
     title: "T1",
@@ -19,23 +20,40 @@ const messages = [
     image: require("../assets/vincent.jpg")
   }
 ];
-const MessagesScreen = ({}) => (
-  <Screen style={styles.screen}>
-    <FlatList
-      data={messages}
-      keyExtractor={message => message.id.toString()}
-      renderItem={({ item }) => (
-        <ListItem
-          title={item.title}
-          subTitle={item.description}
-          image={item.image}
-          onPress={() => console.log("list item pressed")}
-        />
-      )}
-      ItemSeparatorComponent={ListItemSeparator}
-    />
-  </Screen>
-);
+
+function MessagesScreen(props) {
+  const [messages, setMessages] = useState(initialMessages);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const handleDelete = message => {
+    setMessages(messages.filter(item => item.id !== message.id));
+  };
+
+  return (
+    <Screen>
+      <FlatList
+        data={messages}
+        keyExtractor={message => message.id.toString()}
+        renderItem={({ item }) => (
+          <ListItem
+            title={item.title}
+            renderRightActions={() => (
+              <ListItemDeleteAction onPress={() => handleDelete(item)} />
+            )}
+            subTitle={item.description}
+            image={item.image}
+            onPress={() => console.log("list item pressed")}
+          />
+        )}
+        ItemSeparatorComponent={ListItemSeparator}
+        refreshing={refreshing}
+        onRefresh={() => {
+          setMessages(initialMessages);
+        }}
+      />
+    </Screen>
+  );
+}
 
 export default MessagesScreen;
 
