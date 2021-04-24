@@ -6,8 +6,8 @@ import { View, Text, StyleSheet } from "react-native";
 import defaultStyles from "../config/styles";
 import AppText from "./AppText";
 
-const ErrorMessage = ({ message }) => {
-  if (!message) return null;
+const ErrorMessage = ({ message, visible }) => {
+  if (!message || !visible) return null;
   return <AppText style={styles.text}>{message}</AppText>;
 };
 
