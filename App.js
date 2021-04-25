@@ -2,10 +2,10 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Switch, View } from "react-native";
 
-import LoginScreen from "./app/screens/LoginScreen";
+import RegisterScreen from "./app/screens/RegisterScreen";
 
 export default function App() {
-  return <LoginScreen />;
+  return <RegisterScreen />;
 }
 
 const styles = StyleSheet.create({
