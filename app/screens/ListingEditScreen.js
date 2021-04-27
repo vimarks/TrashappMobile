@@ -50,11 +50,18 @@ function ListingEditScreen({}) {
         validationSchema={validationSchema}
       >
         <AppFormField name="title" placeholder="Title" />
-        <AppFormField name="price" keyboardType="numeric" placeholder="Price" />
+        <AppFormField
+          name="price"
+          keyboardType="numeric"
+          placeholder="Price"
+          width={120}
+        />
         <AppFormPicker
           items={categories}
           name="cateogry"
           placeholder="Category"
+          // PickerItemComponent={< CategoryPickerItem />}
+          width="50%"
         />
         <AppFormField
           multiline

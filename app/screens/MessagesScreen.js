@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, FlatList, StyleSheet } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
 
 import ListItem from "../components/ListItem";
 import ListItemSeparator from "../components/ListItemSeparator";
@@ -30,7 +30,7 @@ function MessagesScreen(props) {
   };
 
   return (
-    <Screen>
+    <Screen style={styles.container}>
       <FlatList
         data={messages}
         keyExtractor={message => message.id.toString()}
@@ -57,4 +57,8 @@ function MessagesScreen(props) {
 
 export default MessagesScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  }
+});
